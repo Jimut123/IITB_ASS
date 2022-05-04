@@ -33,7 +33,9 @@ n_epoch_init = n_epoch//10
 save_dir = "samples"
 checkpoint_dir = "models"
 #track image as per index
-save_ind= 16
+# save_ind= 16
+
+save_ind = [[i for i in range(30)]]
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
@@ -53,7 +55,7 @@ def get_data(path):
     Y=[]
     # google colab is weak, use 5000 images
     all_images = glob.glob('{}/*'.format(path))
-    for img_path in tqdm(all_images[:5000]):
+    for img_path in tqdm(all_images):
         X.append(load(img_path,(256,256)))
         # 4 times smaller
         Y.append(load(img_path,(64,64)))
@@ -64,15 +66,18 @@ def get_data(path):
     return X/255.0, Y/255.0
 
 
-HR_train, LR_train= get_data('Kolkata_020/train')
+HR_train, LR_train = get_data('Kolkata_020/train')
 print(HR_train.shape, LR_train.shape)
 
+HR_test, LR_test = get_data('Kolkata_020/test')
+print(HR_test.shape, LR_test.shape)
 
 
-f, ax= plt.subplots(1,2, figsize=(16, 6))
-ax[0].imshow(LR_train[save_ind], aspect='auto')
-ax[1].imshow(HR_train[save_ind], aspect='auto')
-plt.savefig('low_res_high_res.png')
+for item in range(save_ind):
+    f, ax= plt.subplots(1,2, figsize=(14, 6))
+    ax[0].imshow(LR_test[item], aspect='auto')
+    ax[1].imshow(HR_test[item], aspect='auto')
+    plt.savefig('high_low/low_res_high_res_{}.png'.format(i))
 
 
 
@@ -266,10 +271,11 @@ for epoch in range(n_epoch_init):
   print("Epoch: [{}/{}] step: mse: {:.3f} ".format(
             epoch, n_epoch_init , mse_loss))
   if epoch%10 ==0:
-    img= G.predict(LR_train[np.newaxis, save_ind])[0]
-    #img= (img-img.mean())/img.std()
-    img= Image.fromarray(np.uint8(img*255))
-    img.save(os.path.join(save_dir, 'init_g_{}.png'.format(epoch)))
+    for item_arr in save_ind:
+      img= G.predict(LR_test[np.newaxis, item_arr])[0]
+      #img= (img-img.mean())/img.std()
+      img= Image.fromarray(np.uint8(img*255))
+      img.save(os.path.join('changes/', '{}/init_g_{}.png'.format(item_arr,epoch)))
 
 
 f, ax= plt.subplots(1,5, figsize=(16, 6))
@@ -313,23 +319,25 @@ for epoch in range(n_epoch):
 
 
         if epoch%20 ==0:
-            img= G.predict(LR_train[np.newaxis, save_ind])[0]
-            # if not sigmoid
-            #img= (img-img.mean())/img.std()
-            img= Image.fromarray(np.uint8(img*255))
-            img.save(os.path.join(save_dir, 'train_g_{}.png'.format(epoch)))
-
-f, ax= plt.subplots(3,5, figsize=(14, 16))
-for i, file in enumerate(glob.glob('./samples/train*')[:15]):
-    img= load(file, shape=(256, 256))
-    ax[i//5][i%5].imshow(img, aspect='auto')
-
-plt.savefig('changes_over_time.png'.format(i))
+            for item_arr in save_ind:
+                img= G.predict(LR_test[np.newaxis, item])[0]
+                # if not sigmoid
+                #img= (img-img.mean())/img.std()
+                img= Image.fromarray(np.uint8(img*255))
+                img.save(os.path.join('changes/', '{}/train_g_{}.png'.format(item_arr,epoch)))
 
 
-f, ax= plt.subplots(1,3, figsize=(16, 6))
-ax[0].imshow(LR_train[save_ind], aspect='auto')
-ax[1].imshow(load(glob.glob('./samples/train*')[-1], (256, 256)), aspect='auto')
-ax[2].imshow(HR_train[save_ind], aspect='auto')
-plt.show()
-plt.savefig('save_result_full.png'.format(i))
+# f, ax= plt.subplots(3,5, figsize=(14, 16))
+# for i, file in enumerate(glob.glob('./samples/train*')[:15]):
+#     img= load(file, shape=(256, 256))
+#     ax[i//5][i%5].imshow(img, aspect='auto')
+
+# plt.savefig('changes_over_time.png'.format(i))
+
+# for item_arr in save_ind:
+#     f, ax= plt.subplots(1,3, figsize=(16, 6))
+#     ax[0].imshow(LR_test[save_ind], aspect='auto')
+#     ax[1].imshow(load(glob.glob('./samples/train*')[-1], (256, 256)), aspect='auto')
+#     ax[2].imshow(HR_test[save_ind], aspect='auto')
+#     plt.show()
+#     plt.savefig('save_result_full.png'.format(i))
