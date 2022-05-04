@@ -35,7 +35,7 @@ checkpoint_dir = "models"
 #track image as per index
 # save_ind= 16
 
-save_ind = [[i for i in range(30)]]
+save_ind = [i for i in range(30)]
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
