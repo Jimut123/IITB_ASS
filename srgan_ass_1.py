@@ -21,11 +21,11 @@ batch_size = 8
 lr_v = 2e-4
 
 # change the stuff here
-tot_sample= 4900  # Totall traning images
+tot_sample= 10000  # Total traning images
 
 
 ## adversarial learning (SRGAN)
-n_epoch = 500
+n_epoch = 400
 ## initialize G
 n_epoch_init = n_epoch//10
 
@@ -274,7 +274,7 @@ for epoch in range(n_epoch_init):
   text_app = "{} {} {} \n".format(epoch, n_epoch_init, mse_loss)
   with open("first.txt", "a") as myfile:
     myfile.write(text_app)
-  if epoch%10 ==0:
+  if epoch%50 ==0:  ############################################## change it to 100
     for item_arr in range(len(save_ind)):
       img= G.predict(LR_test[np.newaxis, item_arr])[0]
       #img= (img-img.mean())/img.std()
@@ -289,7 +289,7 @@ for i, file in enumerate(glob.glob('./samples/init*')):
 # plt.show()
 plt.savefig('initial_changes.png'.format(i))
 
-n_epoch= n_epoch-200
+n_epoch= n_epoch-100 ########################################3 change it to another value
 for epoch in range(n_epoch):
         i,j= ((epoch)*batch_size)%tot_sample, (((epoch+1))*batch_size)%tot_sample
         if j== 0:
@@ -325,7 +325,7 @@ for epoch in range(n_epoch):
             myfile.write(text_app)
 
 
-        if epoch%20 ==0:
+        if epoch%50 ==0: ###################################################3 change it to 100
             for item_arr in range(len(save_ind)):
                 img= G.predict(LR_test[np.newaxis, item_arr])[0]
                 # if not sigmoid
@@ -347,4 +347,4 @@ for item_arr in range(len(save_ind)):
     ax[1].imshow(load(glob.glob('./changes/{}/train*'.format(item_arr))[-1], (256, 256)), aspect='auto')
     ax[2].imshow(HR_test[item_arr], aspect='auto')
     plt.show()
-    plt.savefig('save_result_full_{}.png'.format(item_arr))
+    plt.savefig('save_results/save_result_full_{}.png'.format(item_arr))
