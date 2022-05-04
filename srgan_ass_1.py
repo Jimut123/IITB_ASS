@@ -25,7 +25,7 @@ tot_sample= 10000  # Total traning images
 
 
 ## adversarial learning (SRGAN)
-n_epoch = 300
+n_epoch = 10000
 ## initialize G
 n_epoch_init = n_epoch//10
 
@@ -58,7 +58,7 @@ def get_data(path):
     for img_path in tqdm(all_images):
         X.append(load(img_path,(256,256)))
         # 4 times smaller
-        Y.append(load(img_path,(32,32)))
+        Y.append(load(img_path,(64,64)))
 
 
     X= np.array(X)
@@ -245,7 +245,7 @@ def get_vgg19():
 
 
 
-G = get_G((32, 32, 3))
+G = get_G((64, 64, 3))
 D = get_D((256, 256, 3))
 vgg= get_vgg19()
 
@@ -274,7 +274,7 @@ for epoch in range(n_epoch_init):
   text_app = "{} {} {} \n".format(epoch, n_epoch_init, mse_loss)
   with open("first.txt", "a") as myfile:
     myfile.write(text_app)
-  if epoch%50 ==0:  ############################################## change it to 100
+  if epoch%500 ==0:  ############################################## change it to 100
     for item_arr in range(len(save_ind)):
       img= G.predict(LR_test[np.newaxis, item_arr])[0]
       #img= (img-img.mean())/img.std()
@@ -289,7 +289,10 @@ for i, file in enumerate(glob.glob('./samples/init*')):
 # plt.show()
 plt.savefig('initial_changes.png'.format(i))
 
-n_epoch= n_epoch-100 ########################################3 change it to another value
+
+
+n_epoch= n_epoch-5000 ########################################3 change it to another value
+
 for epoch in range(n_epoch):
         i,j= ((epoch)*batch_size)%tot_sample, (((epoch+1))*batch_size)%tot_sample
         if j== 0:
@@ -325,7 +328,7 @@ for epoch in range(n_epoch):
             myfile.write(text_app)
 
 
-        if epoch%50 ==0: ###################################################3 change it to 100
+        if epoch%500 ==0: ###################################################3 change it to 100
             for item_arr in range(len(save_ind)):
                 img= G.predict(LR_test[np.newaxis, item_arr])[0]
                 # if not sigmoid
