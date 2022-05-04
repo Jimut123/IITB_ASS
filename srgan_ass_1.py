@@ -73,11 +73,11 @@ HR_test, LR_test = get_data('Kolkata_020/test')
 print(HR_test.shape, LR_test.shape)
 
 
-for item in save_ind:
+for item_arr in save_ind:
     f, ax= plt.subplots(1,2, figsize=(14, 6))
     ax[0].imshow(LR_test[item], aspect='auto')
     ax[1].imshow(HR_test[item], aspect='auto')
-    plt.savefig('high_low/low_res_high_res_{}.png'.format(i))
+    plt.savefig('high_low/low_res_high_res_{}.png'.format(item_arr))
 
 
 
