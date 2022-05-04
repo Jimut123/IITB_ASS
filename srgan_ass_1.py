@@ -271,6 +271,9 @@ for epoch in range(n_epoch_init):
         
   print("Epoch: [{}/{}] step: mse: {:.3f} ".format(
             epoch, n_epoch_init , mse_loss))
+  text_app = "{} {} {}".format(epoch, n_epoch_init, mse_loss)
+  with open("first.txt", "a") as myfile:
+    myfile.write(text_app)
   if epoch%10 ==0:
     for item_arr in range(len(save_ind)):
       img= G.predict(LR_test[np.newaxis, item_arr])[0]
@@ -317,6 +320,9 @@ for epoch in range(n_epoch):
 
         print("Epoch: [{}/{}] step: D.loss: {:.3f}: G.loss: {:.3f}".format(
                 epoch, n_epoch , d_loss, g_loss))
+        text_app = "{} {} {}".format(epoch, n_epoch_init, mse_loss)
+        with open("second.txt", "a") as myfile:
+            myfile.write(text_app)
 
 
         if epoch%20 ==0:
@@ -335,10 +341,10 @@ for epoch in range(n_epoch):
 
 # plt.savefig('changes_over_time.png'.format(i))
 
-# for item_arr in save_ind:
-#     f, ax= plt.subplots(1,3, figsize=(16, 6))
-#     ax[0].imshow(LR_test[save_ind], aspect='auto')
-#     ax[1].imshow(load(glob.glob('./samples/train*')[-1], (256, 256)), aspect='auto')
-#     ax[2].imshow(HR_test[save_ind], aspect='auto')
-#     plt.show()
-#     plt.savefig('save_result_full.png'.format(i))
+for item_arr in range(len(save_ind)):
+    f, ax= plt.subplots(1,3, figsize=(16, 6))
+    ax[0].imshow(LR_test[item_arr], aspect='auto')
+    ax[1].imshow(load(glob.glob('./changes/{}/train*'.format(item_arr))[-1], (256, 256)), aspect='auto')
+    ax[2].imshow(HR_test[item_arr], aspect='auto')
+    plt.show()
+    plt.savefig('save_result_full_{}.png'.format(item_arr))
