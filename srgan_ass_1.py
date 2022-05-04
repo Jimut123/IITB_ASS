@@ -52,8 +52,8 @@ def get_data(path):
     X=[]
     Y=[]
     # google colab is weak, use 5000 images
-    all_images = glob.glob('{}/*'.format(path))[:5000]
-    for img_path in tqdm(all_images):
+    all_images = glob.glob('{}/*'.format(path))
+    for img_path in tqdm(all_images[:5000]):
         X.append(load(img_path,(256,256)))
         # 4 times smaller
         Y.append(load(img_path,(64,64)))
