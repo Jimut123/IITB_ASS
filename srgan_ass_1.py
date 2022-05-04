@@ -17,11 +17,11 @@ import matplotlib.pyplot as plt
 
 ###====================== HYPER-PARAMETERS ===========================###
 ## Adam
-batch_size = 2  
+batch_size = 8 
 lr_v = 2e-4
 
 # change the stuff here
-tot_sample= 100  # Totall traning images
+tot_sample= 4900  # Totall traning images
 
 
 ## adversarial learning (SRGAN)
