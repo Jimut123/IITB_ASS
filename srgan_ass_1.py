@@ -321,7 +321,7 @@ for epoch in range(n_epoch):
 
         if epoch%20 ==0:
             for item_arr in range(len(save_ind)):
-                img= G.predict(LR_test[np.newaxis, item])[0]
+                img= G.predict(LR_test[np.newaxis, item_arr])[0]
                 # if not sigmoid
                 #img= (img-img.mean())/img.std()
                 img= Image.fromarray(np.uint8(img*255))
