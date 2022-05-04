@@ -320,7 +320,7 @@ plt.show()
 
 
 
-f, ax= plt.subplots(1,3, figsize=(16, 16))
+f, ax= plt.subplots(1,3, figsize=(16, 6))
 ax[0].imshow(LR_train[save_ind], aspect='auto')
 ax[1].imshow(load(glob.glob('./samples/train*')[-1], (256, 256)), aspect='auto')
 ax[2].imshow(HR_train[save_ind], aspect='auto')
