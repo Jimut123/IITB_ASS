@@ -64,7 +64,7 @@ def get_data(path):
     return X/255.0, Y/255.0
 
 
-HR_train, LR_train= get_data('Kolkata_020')
+HR_train, LR_train= get_data('Kolkata_020/train')
 print(HR_train.shape, LR_train.shape)
 
 
