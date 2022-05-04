@@ -75,8 +75,8 @@ print(HR_test.shape, LR_test.shape)
 
 for item_arr in save_ind:
     f, ax= plt.subplots(1,2, figsize=(14, 6))
-    ax[0].imshow(np.sqeeze(LR_test[item_arr][0]), aspect='auto')
-    ax[1].imshow(np.sqeeze(HR_test[item_arr][0]), aspect='auto')
+    ax[0].imshow(np.squeeze(LR_test[item_arr][0]), aspect='auto')
+    ax[1].imshow(np.squeeze(HR_test[item_arr][0]), aspect='auto')
     plt.savefig('high_low/low_res_high_res_{}.png'.format(item_arr))
 
 
