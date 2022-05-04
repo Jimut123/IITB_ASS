@@ -69,6 +69,13 @@ print(HR_train.shape, LR_train.shape)
 
 
 
+f, ax= plt.subplots(1,2, figsize=(16, 6))
+ax[0].imshow(LR_train[save_ind], aspect='auto')
+ax[1].imshow(HR_train[save_ind], aspect='auto')
+plt.savefig('low_res_high_res.png')
+
+
+
 
 # Model 
 
@@ -269,8 +276,8 @@ f, ax= plt.subplots(1,5, figsize=(16, 6))
 for i, file in enumerate(glob.glob('./samples/init*')):
     img= load(file, shape=(256, 256))
     ax[i].imshow(img)
-plt.show()
-
+# plt.show()
+plt.savefig('initial_changes.png'.format(i))
 
 n_epoch= n_epoch-200
 for epoch in range(n_epoch):
@@ -316,8 +323,8 @@ f, ax= plt.subplots(3,5, figsize=(14, 16))
 for i, file in enumerate(glob.glob('./samples/train*')[:15]):
     img= load(file, shape=(256, 256))
     ax[i//5][i%5].imshow(img, aspect='auto')
-plt.show() 
 
+plt.savefig('changes_over_time.png'.format(i))
 
 
 f, ax= plt.subplots(1,3, figsize=(16, 6))
@@ -325,4 +332,4 @@ ax[0].imshow(LR_train[save_ind], aspect='auto')
 ax[1].imshow(load(glob.glob('./samples/train*')[-1], (256, 256)), aspect='auto')
 ax[2].imshow(HR_train[save_ind], aspect='auto')
 plt.show()
-plt.savefig('save_result_{}.png'.format(i))
+plt.savefig('save_result_full.png'.format(i))
