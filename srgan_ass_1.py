@@ -271,7 +271,7 @@ for epoch in range(n_epoch_init):
         
   print("Epoch: [{}/{}] step: mse: {:.3f} ".format(
             epoch, n_epoch_init , mse_loss))
-  text_app = "{} {} {}".format(epoch, n_epoch_init, mse_loss)
+  text_app = "{} {} {} \n".format(epoch, n_epoch_init, mse_loss)
   with open("first.txt", "a") as myfile:
     myfile.write(text_app)
   if epoch%10 ==0:
@@ -320,7 +320,7 @@ for epoch in range(n_epoch):
 
         print("Epoch: [{}/{}] step: D.loss: {:.3f}: G.loss: {:.3f}".format(
                 epoch, n_epoch , d_loss, g_loss))
-        text_app = "{} {} {}".format(epoch, n_epoch_init, mse_loss)
+        text_app = "{} {} {} \n".format(epoch, n_epoch, d_loss, g_loss)
         with open("second.txt", "a") as myfile:
             myfile.write(text_app)
 
