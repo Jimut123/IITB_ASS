@@ -73,7 +73,7 @@ HR_test, LR_test = get_data('Kolkata_020/test')
 print(HR_test.shape, LR_test.shape)
 
 
-for item in range(save_ind):
+for item in save_ind:
     f, ax= plt.subplots(1,2, figsize=(14, 6))
     ax[0].imshow(LR_test[item], aspect='auto')
     ax[1].imshow(HR_test[item], aspect='auto')
