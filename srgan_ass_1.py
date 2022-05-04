@@ -271,7 +271,7 @@ for epoch in range(n_epoch_init):
   print("Epoch: [{}/{}] step: mse: {:.3f} ".format(
             epoch, n_epoch_init , mse_loss))
   if epoch%10 ==0:
-    for item_arr in save_ind:
+    for item_arr in range(len(save_ind)):
       img= G.predict(LR_test[np.newaxis, item_arr])[0]
       #img= (img-img.mean())/img.std()
       img= Image.fromarray(np.uint8(img*255))
@@ -319,7 +319,7 @@ for epoch in range(n_epoch):
 
 
         if epoch%20 ==0:
-            for item_arr in save_ind:
+            for item_arr in range(len(save_ind)):
                 img= G.predict(LR_test[np.newaxis, item])[0]
                 # if not sigmoid
                 #img= (img-img.mean())/img.std()
