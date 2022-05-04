@@ -25,7 +25,7 @@ tot_sample= 10000  # Total traning images
 
 
 ## adversarial learning (SRGAN)
-n_epoch = 400
+n_epoch = 300
 ## initialize G
 n_epoch_init = n_epoch//10
 
@@ -58,7 +58,7 @@ def get_data(path):
     for img_path in tqdm(all_images):
         X.append(load(img_path,(256,256)))
         # 4 times smaller
-        Y.append(load(img_path,(64,64)))
+        Y.append(load(img_path,(32,32)))
 
 
     X= np.array(X)
@@ -245,7 +245,7 @@ def get_vgg19():
 
 
 
-G = get_G((64, 64, 3))
+G = get_G((32, 32, 3))
 D = get_D((256, 256, 3))
 vgg= get_vgg19()
 
@@ -346,5 +346,5 @@ for item_arr in range(len(save_ind)):
     ax[0].imshow(LR_test[item_arr], aspect='auto')
     ax[1].imshow(load(glob.glob('./changes/{}/train*'.format(item_arr))[-1], (256, 256)), aspect='auto')
     ax[2].imshow(HR_test[item_arr], aspect='auto')
-    plt.show()
+    # plt.show()
     plt.savefig('save_results/save_result_full_{}.png'.format(item_arr))
