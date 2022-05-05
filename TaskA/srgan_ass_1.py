@@ -17,8 +17,8 @@ import matplotlib.pyplot as plt
 
 ###====================== HYPER-PARAMETERS ===========================###
 ## Adam
-batch_size = 8 
-lr_v = 2e-4
+batch_size = 16
+lr_v = 1e-5
 
 # change the stuff here
 tot_sample= 10000  # Total traning images
