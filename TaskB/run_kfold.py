@@ -17,7 +17,7 @@ from tensorflow.keras.models import Model, model_from_json
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.applications import MobileNetV2
 # from keras.layers.advanced_activations import ELU, LeakyReLU
-from keras.utils.vis_utils import plot_model
+# from keras.utils.vis_utils import plot_model
 from keras import backend as K
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
