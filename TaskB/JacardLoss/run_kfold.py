@@ -414,7 +414,7 @@ for train_index, test_index in kf.split(X):
     model = ModifiedUNet(height=192, width=256, n_channels=3)
 
     #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[dice_coef, jacard, 'accuracy'])
-    model.compile(optimizer=Adam(learning_rate=1e-5),loss=bce_dice_loss,metrics=[dice_coef, jacard, Recall(), Precision(), 'accuracy'])
+    model.compile(optimizer=Adam(learning_rate=1e-5),loss=jacard_loss,metrics=[dice_coef, jacard, Recall(), Precision(), 'accuracy'])
 
     saveModel(model)
 
@@ -424,5 +424,5 @@ for train_index, test_index in kf.split(X):
     fp.write('-1.0')
     fp.close()
 
-    trainStep(model, X_train, Y_train, X_test, Y_test, epochs=500, batchSize=16)
+    trainStep(model, X_train, Y_train, X_test, Y_test, epochs=5, batchSize=16)
 
