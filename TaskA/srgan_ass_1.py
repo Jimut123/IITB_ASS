@@ -323,7 +323,7 @@ for epoch in range(n_epoch):
 
         print("Epoch: [{}/{}] step: D.loss: {:.3f}: G.loss: {:.3f}".format(
                 epoch, n_epoch , d_loss, g_loss))
-        text_app = "{} {} {} \n".format(epoch, n_epoch, d_loss, g_loss)
+        text_app = "{} {} {} {} \n".format(epoch, n_epoch, d_loss, g_loss)
         with open("second.txt", "a") as myfile:
             myfile.write(text_app)
 
