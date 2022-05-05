@@ -291,7 +291,7 @@ plt.savefig('initial_changes.png'.format(i))
 
 
 
-n_epoch= n_epoch-5000 ########################################3 change it to another value
+ ########################################3 change it to another value
 
 for epoch in range(n_epoch):
         i,j= ((epoch)*batch_size)%tot_sample, (((epoch+1))*batch_size)%tot_sample
