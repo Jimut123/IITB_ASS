@@ -39,7 +39,7 @@ from sklearn.metrics import average_precision_score, recall_score
 ######################### Utils
 # All the losses are present here
 
-# from teensorflow.keras.losses import binary_crossentropy
+from tensorflow.keras.losses import binary_crossentropy
 # import keras.backend as K
 # import tensorflow as tf 
 
