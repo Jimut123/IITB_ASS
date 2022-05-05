@@ -212,20 +212,23 @@ for train_index, test_index in kf.split(X):
 
 
         yp = model.predict(x=X_test, batch_size=batchSize, verbose=1)
-
+        yporb = yp.copy()
         yp = np.round(yp,0)
 
         for i in range(10):
-            plt.figure(figsize=(20,10))
-            plt.subplot(1,3,1)
+            plt.figure(figsize=(25,10))
+            plt.subplot(1,4,1)
             plt.imshow(X_test[i])
             plt.title('Input')
-            plt.subplot(1,3,2)
+            plt.subplot(1,4,2)
             plt.imshow(Y_test[i].reshape(Y_test[i].shape[0],Y_test[i].shape[1]))
             plt.title('Ground Truth')
-            plt.subplot(1,3,3)
-            plt.imshow(yp[i].reshape(yp[i].shape[0],yp[i].shape[1]))
+            plt.subplot(1,4,3)
+            plt.imshow(yporb[i].reshape(yporb[i].shape[0],yporb[i].shape[1]))
             plt.title('Prediction')
+            plt.subplot(1,4,4)
+            plt.imshow(yp[i].reshape(yp[i].shape[0],yp[i].shape[1]))
+            plt.title('Rounded')
 
             intersection = yp[i].ravel() * Y_test[i].ravel()
             union = yp[i].ravel() + Y_test[i].ravel() - intersection
